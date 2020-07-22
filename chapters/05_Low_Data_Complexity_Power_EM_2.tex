@@ -1232,13 +1232,14 @@ solver will fail. what can we do in this case? We try again.
 
     \section{Related work} \label{sec:RelatedWork}
     \begin{itemize}
-    \item \textbf{Power analysis attacks on the AES} - This paper describes an attack attack on the AES algorithm using the Difference of Means technique was carried out on a Field-Programmable Gate Array (FPGA) board.
+    \item \textbf{Power analysis attacks on the AES}\cite{lo2017power} -
+     This paper describes an attack attack on the AES algorithm using the Difference of Means technique was carried out on a Field-Programmable Gate Array (FPGA) board.
      The work of Coron et al. described the idea of using the Weight Power Model and experimentation was conducted on a smart card chip. Brier et al. expanded the work on CPA by proposing the use of a Hamming distance power model in place of Hamming weight while results were presented from data gathered from attacking an 8-bit chip against AES.
      Alioto et al. proposed a novel CPA attack named Leakage Power Attack which is derived from the theory behind the Hamming Weight Power Model and results were conducted against a MC74ACT273N chip.
      Lastly, Mestiri et al. describes an attack on a SASEBO-GII board against the AES algorithm with the goal of comparing the Hamming distance model against another derivative of the CPA called the Switching Distance model
     \href{https://doi.org/10.1080/23742917.2016.1231523}{power analysis (DPA) and correlation power analysis (CPA)}.
 
-    \item  \textbf{Differential Power Analysis in AES: A Crypto Anatomy} 
+    \item  \textbf{Differential Power Analysis in AES: A Crypto Anatomy}\cite{jude_differential_Power_analysis} -
     The  initial  papers  on  DPA  are  abstract,  and  recent  papers  propose countermeasures  rather  than  describe  the  attack  methodology  itself.
     None  of  the  previous  papers considered the pipeline effects in a processor, and almost all current processors contain pipelines. 
     And most  of  the papers  do  not clearly  describe  the method  to  locate the  necessary power  magnitudes (corresponding to  the actual instructions which  are executed during  the SBOX lookup) from a long power profile.  
@@ -1247,7 +1248,7 @@ solver will fail. what can we do in this case? We try again.
     Yet, a number of researchers have asked us about how it is done, and this is an effort to  make the steps clear. 
     We also look at the effect the pipeline has on the attack, and methods to identify which instructions are most vulnerable to attack.
 
-    \item  \textbf{Power Analysis Based Side Channel Attack} 
+    \item  \textbf{Power Analysis Based Side Channel Attack}\cite{Power_Analysis_Hasindu} -
     Work related to circuit level hardware countermeasures are very few. 
     Sprunk in his invention uses a clock that outputs a stream of random clock pulses. 
     When the clock is unpredictable, the moment at which a certain instruction would run is also unpredictable. 
@@ -1257,13 +1258,35 @@ solver will fail. what can we do in this case? We try again.
     therefore usage of an unpredictable clock is a disadvantage is such situations
     \href{https://arxiv.org/pdf/1801.00932.pdf}{Power analysis and Testbeds}.
 
-    \item   \textbf{One trace is all it takes: Machine Learning-based Side-channel Attack on EdDSA}\cite{cryptoeprint:2019:358} \\
+    \item   \textbf{One trace is all it takes: Machine Learning-based Side-channel Attack on EdDSA}\cite{cryptoeprint:2019:358} - \\
     The paper proposes a Convolutional Neural Network based profiling attack on the implementation of the Ed25519 Digital Signature Algorithm in the WolfSSL library on a 32 bit STM32F4 microcontroller.
     The attack focuses on the optimized implementation of Elliptic Curve scalar multiplication by Bernstein et al\cite{Bernstein2012} that splits the computation to work on a single nibble of the ephemeral key at a time and uses a lookup table with all possible partial multiplication results.
     The lookup table access is vulnerable to side channel data leakage via power analysis, similarly to the way an SBOX lookup is exploited for side channel attacks on AES.
     The authors evaluate the standard template attack method as well as SVM and RandomForest based attack and finally - a CNN based attack that uses a CNN architecture similar to the well-known VGG model used for computer vision tasks, modified to work with 1D instead of 2D convolutions and fine tuned for SCA in terms of the number of layers and layer sizes. To evaluate the attacks, the authors construct a dataset mapping power traces to the respective ephemeral key nibbles processed when the power trace was recorded. Around 5K profiling (training) traces and 1K attack (test) traces are recorded and used for the evaluation.
     The results show that the CNN based method has a 100\% accuracy of identifying the correct ephemeral key nibble given a trace from the attack set, whereas the SVM and Random Forest methods show a slighly lower accuracy and the template attack lags behind them all. As a consequence, the CNN based method is able to iteratively recover the entire 256bit ephemeral key using just a single guess of each of its 64 nibbles and the private scalar can be computed from the ephemeral key and the respective signed message using a straightforward mathematical formula, thus giving an attack the ability to forge message signatures.
     Another important result is that as few as 500 training traces are sufficient to reach the 100\% accuracy with the CNN based attack.
+
+    
+    \item   \textbf{Current Events: Identifying Webpages by Tapping the Electrical Outlet}\cite{Identifying_Webpages} -\newline
+    
+    Computers plugged into power outlets leak information by drawing variable amounts of power when performing different tasks. 
+    This work examines the extent to which this side channel leaks private information about web browsing.
+    Characterizing the AC power side channel may help lead to practical countermeasures that protect user privacy from untrusted power infrastructure.
+    Web browsers increasingly take advantage of hardware acceleration to implement rich user interfaces. In practice, several challenges complicate the task of identifying webpages:
+    \begin{itemize}
+        \item Competing websites often imitate one another, resulting in similar resource-use patterns.
+        \item Most websites optimize for load time, so many popular webpages load in approximately the same amount of time.
+        \item A complex software stack sits between a webpage and the power supply, introducing layers of indirection that may buffer or hide fine-grained events.
+        \item Many websites change frequently, often presenting different content (e.g., ads) to different users.
+      \end{itemize}
+
+      This paper experimentally demonstrates that, despite the above challenges, 
+      different webpages do induce different power-consumption patterns that can be used to 
+      identify them.\newline 
+      To do so, they used a Fourier transform of the power traces to represent
+      the entire trace in the frequency domain.
+      Then, they built an SVM classifier to distinguish between 50 different webpages and showed it 
+      can acheive 87\% precision and 74\% recall.
 
 
     \end{itemize}
