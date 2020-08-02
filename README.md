@@ -1,23 +1,10 @@
-# Attacks on Implementations Coursebook
+# Attacks on Implementations of Secure Systems
 
-This is the handbook for the course "Attacks on Secure Implementations", taught in Ben-Gurion University by Dr. Yossi Oren.
-
-To compile the book just run `latexmk`
+This is the handbook for the course "Attacks on Secure Implementations", taught in 2020 at Ben-Gurion University by Dr. Yossi Oren.
 
 Online course page: https://moodle2.bgu.ac.il/moodle/enrol/index.php?id=30088
 
 More information: https://iss.oy.ne.ro/Attacks
-
-## HOWTO Compile
-### Windows
-#### Toolchain Installation
-1. Install MikTex from: https://miktex.org/download (with default settings). NOTE that although Tex Live is supposedly a decent alternative to MikTex on windows - attempts to use it for compiling the book failed miserably.
-2. Install Perl from: http://strawberryperl.com/
-3. [Optional but Recommended] Install VSCode and the **LaTeX Workshop** extension to be able to compile from VSCode.
-4. [Optional but Recommended] Install the **LaTex language support** VSCode extension to ease editing in VSCode.
-#### Full book Compilation
-- From VSCode: open UniversityCourseBookAOI.tex, click on the "TEX" icon in the left sidebar, run the "Build LaTeX project" command.
-- Without VSCode: run `latexmk` from the root directory of the book repository
 
 # Course materials
 
@@ -121,9 +108,37 @@ Basic reading is Chapters 7 and 8 of the Coursebook; Whereas chapter 5 mainly fo
 
 Basic reading is chapter 6 of the coursebook that deals CPU Caches and Cache attack techniques; For further reading on cache attacks, see Colin Percival's [Cache Missing For Fun And Profit](http://css.csail.mit.edu/6.858/2014/readings/ht-cache.pdf); The chapter also introduces 2 main cache attack techniques: [Flush+Reload](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/yarom) and [Prime+Probe](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7163050); For further reading about the hash function can be reverse engineered, see [Reverse engineering intel last-level cache complex addressing using performance counters. ](https://link.springer.com/chapter/10.1007%2F978-3-319-26362-5_3); Finally, there is a step-by-step Flush+Reload cache attack (as presented in Gruss, Spreitzer and Mangard's ["Automating attacks on inclusive last-level caches"](https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/gruss) and on Yarom and Faulkner's ["A high resolution, low noise, L3 cache side-channel attack"](https://www.usenix.org/conference/usenixsecurity14/technical-sessions/presentation/yarom) demonstration to retrieve the user's keystroke timestamps in a gedit program. The Github repository can be found [here](https://github.com/clementine-m/cache_template_attacks).
 
-### Lecture 9 - Fault Attacks
+### Lecture 9 - Fault Attacks I
 - [Definition of Fault Attacks](https://youtu.be/PSRZaFiDwy8) - Defining Fault Attacks, which are active attacks for extracting information from devices by breaking them (12 minutes);
 - [FA Example - Unlooper (1997)](https://youtu.be/urrVGoVhC0s) - Discussing unloopers which were smartcards intended to cause the card to skip one or more instructions by applying a "glitch" in some form to the power or clock signal(8 minutes);
 - [Fault Attack Taxonomy](https://youtu.be/9e0fCJMJpQY) - Further discussion of Fault Attacks, fault methods, and targets(25 minutes);
 
 This lecture is based on chapter 9 of the coursebook "Fault Attacks", which is an active attack that allows the attacker to extract information from a device by breaking it. It goes on to discuss different kinds of fault methods (power supply attacks, timing attacks, temperature attacks, and more), further giving examples of classic fault attacks targeting the control flow: [Canon camera blinking](https://chdk.fandom.com/wiki/Obtaining_a_firmware_dump#Q._How_can_I_get_a_firmware_dump.3F), and [Unloopers](https://www.oocities.org/wild_lightning21/hardware/unlooper.htm). We then examine a fault attack on RSA-CRT as presented by Boneh and Lipton in [On the importance of eliminating errors in cryptographic computations](https://doi.org/10.1007/s001450010016); 
+
+### Lecture 10 - Fault Attacks II
+- [Introduction to Biham Shamir Fault Attack](https://youtu.be/Kmx6huPoDJA) - texty texty text (20 minutes);
+- [Biham Shamir Fault Attack Explained](https://youtu.be/hFDZK5nVYGo) - texty texty text (20 minutes);
+- [Introduction to The Boneh, DeMillo, Lipton Fault attack - RSA-CRT](https://youtu.be/kkqEYy-fS0A) - texty texty text (20 minutes);
+- [The Theory of The Boneh, DeMillo, Lipton Fault attack](https://youtu.be/9i02fjm8EPI) - texty texty text (11 minutes);
+- [The Boneh, DeMillo, Lipton Fault attack in practice](https://youtu.be/XLqseoch_wM) - texty texty text (15 minutes);
+- [The Theory of Rowhammer](https://youtu.be/yMdnAXTp_Q0) - texty texty text (17 minutes);
+- [Rowhammer in Practice](https://youtu.be/Smm9I-fyoWA) - texty texty text (14 minutes);
+- [DVFS - Dynamic Voltage and Frequency Scaling](https://youtu.be/Smm9I-fyoWA) - texty texty text (12 minutes);
+
+This lecture is based on chapter 10 of the coursebook "Fault Attacks". Papers covered include Kim et al.'s ["Flipping bits in memory without accessing them: An experimental study of DRAM disturbance errors"](https://doi.org/10.1109/ISCA.2014.6853210), Razavi et al.'s ["Flip Feng Shui: Hammering a Needle in the Software Stack"](https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/razavi), Tang et al.'s ["CLKSCREW: Exposing the Perils of Security-Oblivious Energy Management"](https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/tang), Schmidt and Hutter's ["Optical and EM Fault-Attacks on CRT-based RSA: Concrete Results"](https://graz.pure.elsevier.com/en/publications/optical-and-em-fault-attacks-on-crt-based-rsa-concrete-results), Boneh DeMillo and Lipton's ["On the Importance of Eliminating Errors in Cryptographic Computations"](https://doi.org/10.1007/s001450010016), Murdock et al.'s ["Plundervolt: Software-based Fault Injection Attacks against Intel SGX"](https://www.plundervolt.com), and Biham and Shamir's ["Differential fault analysis of secret key cryptosystems"](https://doi.org/10.1007/BFb0052259).
+
+
+
+## How To Compile The Handbook
+### Windows
+#### Toolchain Installation
+1. Install MikTex from: https://miktex.org/download (with default settings). NOTE that although Tex Live is supposedly a decent alternative to MikTex on windows - attempts to use it for compiling the book failed miserably.
+2. Install Perl from: http://strawberryperl.com/
+3. [Optional but Recommended] Install VSCode and the **LaTeX Workshop** extension to be able to compile from VSCode.
+4. [Optional but Recommended] Install the **LaTex language support** VSCode extension to ease editing in VSCode.
+#### Full book Compilation
+- From VSCode: open UniversityCourseBookAOI.tex, click on the "TEX" icon in the left sidebar, run the "Build LaTeX project" command.
+- Without VSCode: run `latexmk` from the root directory of the book repository
+
+Other operating systems: just run `latexmk`
+
