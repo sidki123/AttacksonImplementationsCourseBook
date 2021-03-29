@@ -1,0 +1,14 @@
+theme: just-the-docs
+title: Attacks on Implementations Coursebook
+
+gems:
+  - jekyll-last-modified-at
+  - jekyll-redirect-from
+  - just-the-docs
+  
+webmaster_verifications:
+  google: G3nnoOJAuTy9rt3nEkP
+
+plugins:
+  - jekyll-seo-tag
+
