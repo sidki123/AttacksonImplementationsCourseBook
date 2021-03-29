@@ -1,7 +1,7 @@
-1. Table of Contents
-{:toc}
 # Temporal Side Channels I
 
+1. Table of Contents
+{:toc}
 ## History
 
 In 1995, at the age of 22, Paul Kocher released a paper called Timing

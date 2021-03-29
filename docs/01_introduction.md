@@ -1,7 +1,8 @@
-1. Table of Contents
-{:toc}
+
 # Introduction
 
+1. Table of Contents
+{:toc}
 ## Motivation
 
 The following story is a true story about the NSA - the US intelligence

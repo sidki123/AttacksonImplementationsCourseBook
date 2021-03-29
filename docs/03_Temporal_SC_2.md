@@ -1,5 +1,8 @@
 # Temporal Side Channels Part 2
 
+1. Table of Contents
+{:toc}
+
 ## recap
 
 In the previous chapter we discussed about RSA cryptosystem . In this
