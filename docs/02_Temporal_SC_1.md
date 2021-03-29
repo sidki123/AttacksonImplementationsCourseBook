@@ -1,3 +1,4 @@
+1. Table of Contents
 {:toc}
 # Temporal Side Channels I
 
