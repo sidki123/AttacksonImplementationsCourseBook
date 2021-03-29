@@ -1,3 +1,6 @@
+---
+nav_order: 2
+---
 # Temporal Side Channels I
 
 1. Table of Contents
