@@ -12,5 +12,5 @@ echo converting ${chapter}...
 pandoc -f latex -t gfm -o ${chapter/tex/md} ${chapter}
 done
 cd ..
+cp chapters/*.md docs
 cp -r images docs
-#cp epub/EPUB/media/* docs/media
