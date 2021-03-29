@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package version="3.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="epub-id-1" prefix="ibooks: http://vocabulary.itunes.apple.com/rdf/ibooks/vocabulary-extensions-1.0/">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
-    <dc:identifier id="epub-id-1">urn:uuid:2feefe62-080d-42cf-9331-6d6071ba9160</dc:identifier>
+    <dc:identifier id="epub-id-1">urn:uuid:148ed221-1ad1-4613-b031-38e4abf45d68</dc:identifier>
     <dc:title id="epub-title-1">Attacks on Implementations of Secure Systems</dc:title>
     <dc:title id="epub-title-2">A Note on the Confinement Problem</dc:title>
-    <dc:date id="epub-date">2021-03-29T12:55:25Z</dc:date>
+    <dc:date id="epub-date">2021-03-29T12:59:08Z</dc:date>
     <dc:language>en-US</dc:language>
     <dc:creator id="epub-creator-1">Edited by Yossi Oren, yos@bgu.ac.il, with a lot of help from his students.</dc:creator>
     <meta refines="#epub-creator-1" property="role" scheme="marc:relators">aut</meta>
-    <meta property="dcterms:modified">2021-03-29T12:55:25Z</meta>
+    <meta property="dcterms:modified">2021-03-29T12:59:08Z</meta>
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
