@@ -1,4 +1,9 @@
+---
+nav_order: 09
+---
 # Fault Attacks
+1. Table of Contents
+{:toc}
 
 ## Topics
 

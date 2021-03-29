@@ -1,4 +1,9 @@
+---
+nav_order: 02
+---
 # Temporal Side Channels I
+1. Table of Contents
+{:toc}
 
 ## History
 

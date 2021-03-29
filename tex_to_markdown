@@ -9,7 +9,20 @@ for chapter in ../chapters/*.tex
 do
 echo converting ${chapter}...
 #pandoc -f html -t gfm -o ${chapter/xhtml/md} ${chapter}
-pandoc -f latex -t gfm -o ${chapter/tex/md} ${chapter}
+
+# add markup to the beginning
+echo --- >  ${chapter/tex/md}
+echo nav_order: `echo ${chapter} | awk -F/ '{print $3}' | cut -c -2` >>  ${chapter/tex/md}
+echo --- >>  ${chapter/tex/md}
+
+# add TOC 
+pandoc -f latex -t gfm ${chapter} | head -n 1 >> ${chapter/tex/md}
+echo 1. Table of Contents >>  ${chapter/tex/md}
+echo {:toc} >>  ${chapter/tex/md}
+
+# add the rest
+pandoc -f latex -t gfm ${chapter} | tail -n +2 >> ${chapter/tex/md}
+
 done
 cd ..
 cp chapters/*.md docs

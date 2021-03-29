@@ -1,4 +1,9 @@
+---
+nav_order: 08
+---
 # Correlation Power Analysis
+1. Table of Contents
+{:toc}
 
 this lecture is the last technical lecture of the course about High Data
 Complexity Power Analysis, CPA.

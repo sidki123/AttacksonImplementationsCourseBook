@@ -1,4 +1,9 @@
+---
+nav_order: 06
+---
 # Introduction to micro-architectural attacks
+1. Table of Contents
+{:toc}
 
 Clementine Maurice, CNRS, IRISA  
 April 30, 2019 — Ben Gurion University, Israel

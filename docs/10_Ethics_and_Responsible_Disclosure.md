@@ -1,4 +1,9 @@
+---
+nav_order: 10
+---
 # Ethics and Responsible Disclosure
+1. Table of Contents
+{:toc}
 
 ## Layout
 

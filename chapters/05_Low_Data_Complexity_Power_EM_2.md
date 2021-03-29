@@ -1,4 +1,9 @@
+---
+nav_order: 05
+---
 # Low Data Complexity Power/EM 2
+1. Table of Contents
+{:toc}
 
 We want to see what is power analysis all about and see a very simple
 power analysis attack that we can actually perform. Then we will dive

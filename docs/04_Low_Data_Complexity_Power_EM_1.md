@@ -1,4 +1,9 @@
+---
+nav_order: 04
+---
 # Power/EM I
+1. Table of Contents
+{:toc}
 
 In this chapter, we’re going to learn about:
 

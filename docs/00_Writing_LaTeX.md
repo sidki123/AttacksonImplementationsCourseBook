@@ -1,4 +1,9 @@
+---
+nav_order: 00
+---
 # Writing LaTeX
+1. Table of Contents
+{:toc}
 
 This document shows how you can get ePub-like formatting in LaTeX with
 the `memoir` document class. You can’t yet export directly to ePub from

@@ -1,4 +1,9 @@
+---
+nav_order: 07
+---
 # High Data Complexity Power/EM 1
+1. Table of Contents
+{:toc}
 
 So far, we have attacked two cryptographic systems in the course:
 

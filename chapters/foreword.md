@@ -1,4 +1,9 @@
+---
+nav_order: fo
+---
 # Foreword
+1. Table of Contents
+{:toc}
 
 This document contains the collected scribe notes created by the
 students of my course titled "Attacks on Secure Implementations", given

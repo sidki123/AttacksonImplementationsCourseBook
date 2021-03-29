@@ -1,4 +1,9 @@
+---
+nav_order: 01
+---
 # Introduction
+1. Table of Contents
+{:toc}
 
 ## Motivation
 

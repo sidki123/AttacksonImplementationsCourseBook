@@ -1,11 +1,10 @@
 ---
-nav_order: 1
+nav_order: 01
 ---
-
 # Introduction
-
 1. Table of Contents
 {:toc}
+
 ## Motivation
 
 The following story is a true story about the NSA - the US intelligence

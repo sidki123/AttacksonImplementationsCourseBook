@@ -1,4 +1,9 @@
+---
+nav_order: 03
+---
 # Temporal Side Channels Part 2
+1. Table of Contents
+{:toc}
 
 ## recap
 
