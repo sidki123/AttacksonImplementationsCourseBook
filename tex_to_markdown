@@ -1,8 +1,12 @@
 #! /bin/sh
 pandoc -f latex -t epub -o epub/textbook.epub UniversityCoursebookAOI.tex
-unzip epub/textbook.epub
-cp -r epub/media docs
-for chapter in epub/text/*.xhtml
+cd epub
+unzip -o textbook.epub
+cd ..
+for chapter in epub/EPUB/text/*.xhtml
 do
-pandoc -f html -t gfm -o ${${chapter/xhtml/md}/text/../docs} book/${chapter}
+echo converting ${chapter}...
+pandoc -f html -t markdown -o ${chapter/xhtml/md} ${chapter}
 done
+cp epub/EPUB/text/*.md docs/book
+cp epub/EPUB/media/* docs/media

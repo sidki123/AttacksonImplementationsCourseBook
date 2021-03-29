@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:b9b5c77a-e294-462f-90fe-2c7d25d56b82" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text>Attacks on Implementations of Secure SystemsA Note on the Confinement Problem</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-0">
+      <navLabel>
+        <text>Attacks on Implementations of Secure SystemsA Note on the Confinement Problem</text>
+      </navLabel>
+      <content src="text/title_page.xhtml" />
+    </navPoint>
+    <navPoint id="navPoint-1">
+      <navLabel>
+        <text>Foreword</text>
+      </navLabel>
+      <content src="text/ch001.xhtml#chap:foreword" />
+    </navPoint>
+    <navPoint id="navPoint-2">
+      <navLabel>
+        <text>Introduction</text>
+      </navLabel>
+      <content src="text/ch002.xhtml#chap:c1_IntroductionAOI" />
+      <navPoint id="navPoint-3">
+        <navLabel>
+          <text>Motivation</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:Motivation" />
+      </navPoint>
+      <navPoint id="navPoint-4">
+        <navLabel>
+          <text>System Implementation</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:SystemImpl" />
+      </navPoint>
+      <navPoint id="navPoint-5">
+        <navLabel>
+          <text>Security of a System</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:SystemSecurity" />
+      </navPoint>
+      <navPoint id="navPoint-6">
+        <navLabel>
+          <text>Constructing and Using a Threat Model</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:BreakImpl" />
+      </navPoint>
+      <navPoint id="navPoint-7">
+        <navLabel>
+          <text>Related Work</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:RelatedWork" />
+        <navPoint id="navPoint-8">
+          <navLabel>
+            <text>Research Highlights</text>
+          </navLabel>
+          <content src="text/ch002.xhtml#research-highlights" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-9">
+      <navLabel>
+        <text>Temporal Side Channels I</text>
+      </navLabel>
+      <content src="text/ch003.xhtml#temporal-side-channels-i" />
+      <navPoint id="navPoint-10">
+        <navLabel>
+          <text>History</text>
+        </navLabel>
+        <content src="text/ch003.xhtml#history" />
+      </navPoint>
+      <navPoint id="navPoint-11">
+        <navLabel>
+          <text>The Threat Model</text>
+        </navLabel>
+        <content src="text/ch003.xhtml#the-threat-model" />
+        <navPoint id="navPoint-12">
+          <navLabel>
+            <text>When is a timing attack even possible?</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#when-is-a-timing-attack-even-possible" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-13">
+        <navLabel>
+          <text>Timing attack</text>
+        </navLabel>
+        <content src="text/ch003.xhtml#timing-attack" />
+      </navPoint>
+      <navPoint id="navPoint-14">
+        <navLabel>
+          <text>Timing Attack Defenses</text>
+        </navLabel>
+        <content src="text/ch003.xhtml#timing-attack-defenses" />
+        <navPoint id="navPoint-15">
+          <navLabel>
+            <text>Mitigation</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#mitigation" />
+        </navPoint>
+        <navPoint id="navPoint-16">
+          <navLabel>
+            <text>Prevention</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#prevention" />
+        </navPoint>
+        <navPoint id="navPoint-17">
+          <navLabel>
+            <text>Prevention Method 2: Hashing</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#prevention-method-2-hashing" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-18">
+        <navLabel>
+          <text>The Algebra Behind RSA</text>
+        </navLabel>
+        <content src="text/ch003.xhtml#the-algebra-behind-rsa" />
+        <navPoint id="navPoint-19">
+          <navLabel>
+            <text>Elementary Operations of RSA</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#elementary-operations-of-rsa" />
+        </navPoint>
+        <navPoint id="navPoint-20">
+          <navLabel>
+            <text>Research Highlights</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#research-highlights-1" />
+        </navPoint>
+        <navPoint id="navPoint-21">
+          <navLabel>
+            <text>See also</text>
+          </navLabel>
+          <content src="text/ch003.xhtml#see-also" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-22">
+      <navLabel>
+        <text>Temporal Side Channels Part 2</text>
+      </navLabel>
+      <content src="text/ch004.xhtml#cha:Temporal Side Channels Part 2" />
+      <navPoint id="navPoint-23">
+        <navLabel>
+          <text>recap</text>
+        </navLabel>
+        <content src="text/ch004.xhtml#sec:recap" />
+      </navPoint>
+      <navPoint id="navPoint-24">
+        <navLabel>
+          <text>Efficiently Implementing Modular Exponentiations</text>
+        </navLabel>
+        <content src="text/ch004.xhtml#sec:Efficiently Implementing Modular Exponentiations" />
+      </navPoint>
+      <navPoint id="navPoint-25">
+        <navLabel>
+          <text>Temporal Side Channel on RSA</text>
+        </navLabel>
+        <content src="text/ch004.xhtml#sec:Temporal Side Channel on RSA" />
+      </navPoint>
+      <navPoint id="navPoint-26">
+        <navLabel>
+          <text>Research highlights</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:RelatedWork" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-27">
+      <navLabel>
+        <text>Power/EM I</text>
+      </navLabel>
+      <content src="text/ch005.xhtml#c4_forthchapter:cha" />
+      <navPoint id="navPoint-28">
+        <navLabel>
+          <text>Electronic Circuits 101</text>
+        </navLabel>
+        <content src="text/ch005.xhtml#electronic-circuits-101" />
+        <navPoint id="navPoint-29">
+          <navLabel>
+            <text>A basic electronic circuit</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#a-basic-electronic-circuit" />
+        </navPoint>
+        <navPoint id="navPoint-30">
+          <navLabel>
+            <text>Resistors</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#resistors" />
+        </navPoint>
+        <navPoint id="navPoint-31">
+          <navLabel>
+            <text>Ohm’s law</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#ohms-law" />
+        </navPoint>
+        <navPoint id="navPoint-32">
+          <navLabel>
+            <text>Power</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#power" />
+        </navPoint>
+        <navPoint id="navPoint-33">
+          <navLabel>
+            <text>Power Consumption</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#power-consumption" />
+        </navPoint>
+        <navPoint id="navPoint-34">
+          <navLabel>
+            <text>Current and Voltage dividers</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#current-and-voltage-dividers" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-35">
+        <navLabel>
+          <text>Measuring Power Consumption</text>
+        </navLabel>
+        <content src="text/ch005.xhtml#measuring-power-consumption" />
+        <navPoint id="navPoint-36">
+          <navLabel>
+            <text>Amperemeter</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#amperemeter" />
+        </navPoint>
+        <navPoint id="navPoint-37">
+          <navLabel>
+            <text>Voltmeter</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#voltmeter" />
+        </navPoint>
+        <navPoint id="navPoint-38">
+          <navLabel>
+            <text>Power consumption - what’s next?</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#power-consumption---whats-next" />
+        </navPoint>
+        <navPoint id="navPoint-39">
+          <navLabel>
+            <text>Types of electronic components</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#types-of-electronic-components" />
+        </navPoint>
+        <navPoint id="navPoint-40">
+          <navLabel>
+            <text>Field-Effect Transistor</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#field-effect-transistor" />
+        </navPoint>
+        <navPoint id="navPoint-41">
+          <navLabel>
+            <text>Semiconductors</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#semiconductors" />
+        </navPoint>
+        <navPoint id="navPoint-42">
+          <navLabel>
+            <text>How does the Field-Effect Transistor work? </text>
+          </navLabel>
+          <content src="text/ch005.xhtml#how-does-the-field-effect-transistor-work" />
+        </navPoint>
+        <navPoint id="navPoint-43">
+          <navLabel>
+            <text>Buliding an Amplifier using a FET</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#buliding-an-amplifier-using-a-fet" />
+        </navPoint>
+        <navPoint id="navPoint-44">
+          <navLabel>
+            <text>CMOS</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#cmos" />
+        </navPoint>
+        <navPoint id="navPoint-45">
+          <navLabel>
+            <text>NOT Gate CMOS</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#not-gate-cmos" />
+        </navPoint>
+        <navPoint id="navPoint-46">
+          <navLabel>
+            <text>When does a CMOS circuit consume power?</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#when-does-a-cmos-circuit-consume-power" />
+        </navPoint>
+        <navPoint id="navPoint-47">
+          <navLabel>
+            <text>AND Gate CMOS</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#and-gate-cmos" />
+        </navPoint>
+        <navPoint id="navPoint-48">
+          <navLabel>
+            <text>Storage circuits</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#storage-circuits" />
+        </navPoint>
+        <navPoint id="navPoint-49">
+          <navLabel>
+            <text>Core i7 chip</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#core-i7-chip" />
+        </navPoint>
+        <navPoint id="navPoint-50">
+          <navLabel>
+            <text>Power Consumption Variability</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#power-consumption-variability" />
+        </navPoint>
+        <navPoint id="navPoint-51">
+          <navLabel>
+            <text>Hamming distance model</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#hamming-distance-model" />
+        </navPoint>
+        <navPoint id="navPoint-52">
+          <navLabel>
+            <text>Power Consumption Noise</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#power-consumption-noise" />
+        </navPoint>
+        <navPoint id="navPoint-53">
+          <navLabel>
+            <text>From Power to EM</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#from-power-to-em" />
+        </navPoint>
+        <navPoint id="navPoint-54">
+          <navLabel>
+            <text>Measurement setups</text>
+          </navLabel>
+          <content src="text/ch005.xhtml#measurement-setups" />
+        </navPoint>
+        <navPoint id="navPoint-55">
+          <navLabel>
+            <text> Research Highlights </text>
+          </navLabel>
+          <content src="text/ch005.xhtml#research-highlights-2" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-56">
+      <navLabel>
+        <text>Low Data Complexity Power/EM 2</text>
+      </navLabel>
+      <content src="text/ch006.xhtml#low-data-complexity-powerem-2" />
+      <navPoint id="navPoint-57">
+        <navLabel>
+          <text>The New York Times, Take 2</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#the-new-york-times-take-2" />
+      </navPoint>
+      <navPoint id="navPoint-58">
+        <navLabel>
+          <text>Power Analysis Attacks</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#power-analysis-attacks" />
+      </navPoint>
+      <navPoint id="navPoint-59">
+        <navLabel>
+          <text>Simple Power Analysis</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#simple-power-analysis" />
+      </navPoint>
+      <navPoint id="navPoint-60">
+        <navLabel>
+          <text>Other Types of Power Attacks</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#other-types-of-power-attacks" />
+      </navPoint>
+      <navPoint id="navPoint-61">
+        <navLabel>
+          <text>Tuning the power model</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#tuning-the-power-model" />
+      </navPoint>
+      <navPoint id="navPoint-62">
+        <navLabel>
+          <text>8-bit microcontroller</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#bit-microcontroller" />
+      </navPoint>
+      <navPoint id="navPoint-63">
+        <navLabel>
+          <text>Power Model for Microcontrollers</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#power-model-for-microcontrollers" />
+      </navPoint>
+      <navPoint id="navPoint-64">
+        <navLabel>
+          <text>Simple Power Analysis of RSA</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#simple-power-analysis-of-rsa" />
+      </navPoint>
+      <navPoint id="navPoint-65">
+        <navLabel>
+          <text>Simple Power Analysis of AES</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#simple-power-analysis-of-aes" />
+      </navPoint>
+      <navPoint id="navPoint-66">
+        <navLabel>
+          <text>Advanced Encryption Standard</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#advanced-encryption-standard" />
+      </navPoint>
+      <navPoint id="navPoint-67">
+        <navLabel>
+          <text>The Advanced Encryption Standard</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#the-advanced-encryption-standard" />
+      </navPoint>
+      <navPoint id="navPoint-68">
+        <navLabel>
+          <text>AES Internals</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#aes-internals" />
+        <navPoint id="navPoint-69">
+          <navLabel>
+            <text>SubBytes</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#subbytes" />
+        </navPoint>
+        <navPoint id="navPoint-70">
+          <navLabel>
+            <text>ShiftRows</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#shiftrows" />
+        </navPoint>
+        <navPoint id="navPoint-71">
+          <navLabel>
+            <text>MixColumns</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#mixcolumns" />
+        </navPoint>
+        <navPoint id="navPoint-72">
+          <navLabel>
+            <text>AddRoundKey</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#addroundkey" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-73">
+        <navLabel>
+          <text>AES Power Analysis</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#aes-power-analysis" />
+      </navPoint>
+      <navPoint id="navPoint-74">
+        <navLabel>
+          <text>Template Attacks</text>
+        </navLabel>
+        <content src="text/ch006.xhtml#template-attacks" />
+        <navPoint id="navPoint-75">
+          <navLabel>
+            <text>Introduction</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#introduction" />
+        </navPoint>
+        <navPoint id="navPoint-76">
+          <navLabel>
+            <text>Algorithm</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#algorithm" />
+        </navPoint>
+        <navPoint id="navPoint-77">
+          <navLabel>
+            <text>Signals, Noise, and Statistics</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#signals-noise-and-statistics" />
+        </navPoint>
+        <navPoint id="navPoint-78">
+          <navLabel>
+            <text>Creating the Template</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#creating-the-template" />
+        </navPoint>
+        <navPoint id="navPoint-79">
+          <navLabel>
+            <text>Analyzing the Data</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#analyzing-the-data" />
+        </navPoint>
+        <navPoint id="navPoint-80">
+          <navLabel>
+            <text>Attack Time</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#attack-time" />
+        </navPoint>
+        <navPoint id="navPoint-81">
+          <navLabel>
+            <text>practical template attacks</text>
+          </navLabel>
+          <content src="text/ch006.xhtml#practical-template-attacks" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-82">
+        <navLabel>
+          <text>Related work</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:RelatedWork" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-83">
+      <navLabel>
+        <text>Introduction to micro-architectural attacks</text>
+      </navLabel>
+      <content src="text/ch007.xhtml#chap:c7_cacheattacks" />
+      <navPoint id="navPoint-84">
+        <navLabel>
+          <text>Background &amp; Primitives</text>
+        </navLabel>
+        <content src="text/ch007.xhtml#sec:BackgroundnPrimitives" />
+        <navPoint id="navPoint-85">
+          <navLabel>
+            <text>Example: Cache attack on RSA Square-and-Multiply Exponentiation</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:CacheattackonRSA" />
+        </navPoint>
+        <navPoint id="navPoint-86">
+          <navLabel>
+            <text>Attack Model</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:attackmodel" />
+        </navPoint>
+        <navPoint id="navPoint-87">
+          <navLabel>
+            <text>Today’s CPU Complexity</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:todaycpucomplex" />
+        </navPoint>
+        <navPoint id="navPoint-88">
+          <navLabel>
+            <text>Background on Caches</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:backgroundoncaches" />
+        </navPoint>
+        <navPoint id="navPoint-89">
+          <navLabel>
+            <text>Caching Basics</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:cachingbasics" />
+        </navPoint>
+        <navPoint id="navPoint-90">
+          <navLabel>
+            <text>Set-Associative Caches</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:setassoccaches" />
+        </navPoint>
+        <navPoint id="navPoint-91">
+          <navLabel>
+            <text>Virtual Addresses or Physical Addresses</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:addrorphysicaladdr" />
+        </navPoint>
+        <navPoint id="navPoint-92">
+          <navLabel>
+            <text>Replacement Policy</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:replacementpolicy" />
+        </navPoint>
+        <navPoint id="navPoint-93">
+          <navLabel>
+            <text>Caches on Intel CPUs</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:cachesonintelcpus" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-94">
+        <navLabel>
+          <text>Cache Attacks Techniques</text>
+        </navLabel>
+        <content src="text/ch007.xhtml#sec:cacheattackstech" />
+        <navPoint id="navPoint-95">
+          <navLabel>
+            <text>Cache Side-Channel Timing Attacks</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:cachesidechanneltiming" />
+        </navPoint>
+        <navPoint id="navPoint-96">
+          <navLabel>
+            <text>Flush+Reload</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:flushreload" />
+        </navPoint>
+        <navPoint id="navPoint-97">
+          <navLabel>
+            <text>Prime+Probe</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:primeprobe" />
+        </navPoint>
+        <navPoint id="navPoint-98">
+          <navLabel>
+            <text>Hardware vs. implementations</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:Hardwarevsimplementations" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-99">
+        <navLabel>
+          <text>Step by Step Attack Demo</text>
+        </navLabel>
+        <content src="text/ch007.xhtml#sec:stepbystepattack" />
+        <navPoint id="navPoint-100">
+          <navLabel>
+            <text>Step 1: Calibration</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:step1calibration" />
+        </navPoint>
+        <navPoint id="navPoint-101">
+          <navLabel>
+            <text>Step 2: Profiling</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:step2profiling" />
+        </navPoint>
+        <navPoint id="navPoint-102">
+          <navLabel>
+            <text>Step 3: Exploitation</text>
+          </navLabel>
+          <content src="text/ch007.xhtml#subsec:step3exploitation" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-103">
+        <navLabel>
+          <text>Cache Template Attacks Paper</text>
+        </navLabel>
+        <content src="text/ch007.xhtml#sec:Cache Template Attacks Paper" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-104">
+      <navLabel>
+        <text>High Data Complexity Power/EM 1</text>
+      </navLabel>
+      <content src="text/ch008.xhtml#cha:High Data Complexity Power/EM 1" />
+      <navPoint id="navPoint-105">
+        <navLabel>
+          <text>High Data Complexity Attacks</text>
+        </navLabel>
+        <content src="text/ch008.xhtml#high-data-complexity-attacks-1" />
+        <navPoint id="navPoint-106">
+          <navLabel>
+            <text>How complex power analysis works</text>
+          </navLabel>
+          <content src="text/ch008.xhtml#how-complex-power-analysis-works" />
+        </navPoint>
+        <navPoint id="navPoint-107">
+          <navLabel>
+            <text>Using Vaizata method</text>
+          </navLabel>
+          <content src="text/ch008.xhtml#using-vaizata-method" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-108">
+        <navLabel>
+          <text>DPA Lab</text>
+        </navLabel>
+        <content src="text/ch008.xhtml#dpa-lab" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-109">
+      <navLabel>
+        <text>Correlation Power Analysis</text>
+      </navLabel>
+      <content src="text/ch009.xhtml#c8_fifthcapter" />
+      <navPoint id="navPoint-110">
+        <navLabel>
+          <text>Previous lectures recap</text>
+        </navLabel>
+        <content src="text/ch009.xhtml#c8_prev_lectures_recap:sec" />
+        <navPoint id="navPoint-111">
+          <navLabel>
+            <text>Timing side channel</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_prev_lectures_recap_timing_sc:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-112">
+          <navLabel>
+            <text>Differential Power Analysis (DPA)</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_prev_lectures_recap_dpa_sc:subsec" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-113">
+        <navLabel>
+          <text>Correlation Power Analysis (CPA)</text>
+        </navLabel>
+        <content src="text/ch009.xhtml#c8_cpa:sec" />
+        <navPoint id="navPoint-114">
+          <navLabel>
+            <text>Hamming weight</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_CPA_hamming_weight:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-115">
+          <navLabel>
+            <text>CPA background</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_CPA_background:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-116">
+          <navLabel>
+            <text>CPA on AES motivation</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#cpa-on-aes-motivation" />
+        </navPoint>
+        <navPoint id="navPoint-117">
+          <navLabel>
+            <text>CPA’s data structures</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_CPA_data_structures:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-118">
+          <navLabel>
+            <text>CPA on AES step by step</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_CPA_overview:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-119">
+          <navLabel>
+            <text>CPA warm up example</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_CPA_warm_up_example:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-120">
+          <navLabel>
+            <text>CPA example</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c8_CPA_example:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-121">
+          <navLabel>
+            <text>CPA in Matlab examples</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#c6_Matlab_CPA_example:subsec" />
+        </navPoint>
+        <navPoint id="navPoint-122">
+          <navLabel>
+            <text>Guest Lecture - Stjepan Picek</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#guest-lecture---stjepan-picek" />
+        </navPoint>
+        <navPoint id="navPoint-123">
+          <navLabel>
+            <text>Guest Lecture - Jiska Classen</text>
+          </navLabel>
+          <content src="text/ch009.xhtml#guest-lecture---jiska-classen" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-124">
+      <navLabel>
+        <text>Fault Attacks</text>
+      </navLabel>
+      <content src="text/ch010.xhtml#cha:c9_ninthchapter" />
+      <navPoint id="navPoint-125">
+        <navLabel>
+          <text>Topics</text>
+        </navLabel>
+        <content src="text/ch010.xhtml#sec:topics" />
+      </navPoint>
+      <navPoint id="navPoint-126">
+        <navLabel>
+          <text>Introduction to Fault Attacks</text>
+        </navLabel>
+        <content src="text/ch010.xhtml#sec:introduction_to_fault_attacks" />
+      </navPoint>
+      <navPoint id="navPoint-127">
+        <navLabel>
+          <text>Active Attacks</text>
+        </navLabel>
+        <content src="text/ch010.xhtml#sec:active_attacks" />
+        <navPoint id="navPoint-128">
+          <navLabel>
+            <text>Breaking a device-under-test</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:breaking_a_device_under_test" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-129">
+        <navLabel>
+          <text>Fault Attack Taxonomy</text>
+        </navLabel>
+        <content src="text/ch010.xhtml#sec:fault_attack_taxonomy" />
+        <navPoint id="navPoint-130">
+          <navLabel>
+            <text>Fault Methods</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:fault_methods" />
+        </navPoint>
+        <navPoint id="navPoint-131">
+          <navLabel>
+            <text>Fault Properties</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:fault_properties" />
+        </navPoint>
+        <navPoint id="navPoint-132">
+          <navLabel>
+            <text>Fault Target</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:fault_targets" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-133">
+        <navLabel>
+          <text>Fault attack on RSA-CRT</text>
+        </navLabel>
+        <content src="text/ch010.xhtml#sec:fault_attack_on_rsa_crt" />
+        <navPoint id="navPoint-134">
+          <navLabel>
+            <text>RSA decryption</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:rsa_decryption" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-135">
+        <navLabel>
+          <text>Rowhammer</text>
+        </navLabel>
+        <content src="text/ch010.xhtml#sec:rowhammer" />
+        <navPoint id="navPoint-136">
+          <navLabel>
+            <text>Rowhammer attack taxonomy</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:rowhammer_attack_taxonomy" />
+        </navPoint>
+        <navPoint id="navPoint-137">
+          <navLabel>
+            <text>Double-sided Rowhammer</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:double_sided_rowhammer" />
+        </navPoint>
+        <navPoint id="navPoint-138">
+          <navLabel>
+            <text>Countermeasures</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:countermeasures" />
+        </navPoint>
+        <navPoint id="navPoint-139">
+          <navLabel>
+            <text>Rowhammer variations</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#subsec:rowhammer_variations" />
+        </navPoint>
+        <navPoint id="navPoint-140">
+          <navLabel>
+            <text>Rowhammer-based attacks</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#rowhammer-based-attacks" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-141">
+        <navLabel>
+          <text>Related Work</text>
+        </navLabel>
+        <content src="text/ch002.xhtml#sec:RelatedWork" />
+        <navPoint id="navPoint-142">
+          <navLabel>
+            <text>VoltJockey</text>
+          </navLabel>
+          <content src="text/ch010.xhtml#voltjockey" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-143">
+      <navLabel>
+        <text>Ethics and Responsible Disclosure</text>
+      </navLabel>
+      <content src="text/ch011.xhtml#ethics_chapter" />
+      <navPoint id="navPoint-144">
+        <navLabel>
+          <text>Layout</text>
+        </navLabel>
+        <content src="text/ch011.xhtml#layout" />
+      </navPoint>
+      <navPoint id="navPoint-145">
+        <navLabel>
+          <text>Computer Laws</text>
+        </navLabel>
+        <content src="text/ch011.xhtml#sec:comp_laws" />
+        <navPoint id="navPoint-146">
+          <navLabel>
+            <text>Definitions</text>
+          </navLabel>
+          <content src="text/ch011.xhtml#definitions" />
+        </navPoint>
+        <navPoint id="navPoint-147">
+          <navLabel>
+            <text>Unlawful Disruption or Interfering with a Computer System</text>
+          </navLabel>
+          <content src="text/ch011.xhtml#unlawful-disruption-or-interfering-with-a-computer-system" />
+        </navPoint>
+        <navPoint id="navPoint-148">
+          <navLabel>
+            <text>False Information or Output</text>
+          </navLabel>
+          <content src="text/ch011.xhtml#false-information-or-output" />
+        </navPoint>
+        <navPoint id="navPoint-149">
+          <navLabel>
+            <text>Unlawful Access</text>
+          </navLabel>
+          <content src="text/ch011.xhtml#unlawful-access" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-150">
+        <navLabel>
+          <text>Cyber Ethics</text>
+        </navLabel>
+        <content src="text/ch011.xhtml#sec:cyber_ethics" />
+        <navPoint id="navPoint-151">
+          <navLabel>
+            <text>Case Studies</text>
+          </navLabel>
+          <content src="text/ch011.xhtml#case-studies" />
+        </navPoint>
+        <navPoint id="navPoint-152">
+          <navLabel>
+            <text>Discussion</text>
+          </navLabel>
+          <content src="text/ch011.xhtml#discussion" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-153">
+        <navLabel>
+          <text>Responsible Disclosure</text>
+        </navLabel>
+        <content src="text/ch011.xhtml#responsible-disclosure" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-154">
+      <navLabel>
+        <text>Writing LaTeX</text>
+      </navLabel>
+      <content src="text/ch012.xhtml#cha:c1_firstchapter" />
+      <navPoint id="navPoint-155">
+        <navLabel>
+          <text>Basic Formatting</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_basicformatting" />
+      </navPoint>
+      <navPoint id="navPoint-156">
+        <navLabel>
+          <text>Lists</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_lists" />
+      </navPoint>
+      <navPoint id="navPoint-157">
+        <navLabel>
+          <text>Verbatim text</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_verbatim" />
+      </navPoint>
+      <navPoint id="navPoint-158">
+        <navLabel>
+          <text>Chapters and Sections</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_chaptersandsections" />
+      </navPoint>
+      <navPoint id="navPoint-159">
+        <navLabel>
+          <text>Tables</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_tables" />
+      </navPoint>
+      <navPoint id="navPoint-160">
+        <navLabel>
+          <text>Footnotes</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_footnotes" />
+      </navPoint>
+      <navPoint id="navPoint-161">
+        <navLabel>
+          <text>Inserting Images</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_images" />
+      </navPoint>
+      <navPoint id="navPoint-162">
+        <navLabel>
+          <text>TikZ Graphics</text>
+        </navLabel>
+        <content src="text/ch012.xhtml#sec:c1_tikzgraphics" />
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

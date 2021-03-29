@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <title>ch010.xhtml</title>
+  <link rel="stylesheet" type="text/css" href="../styles/stylesheet1.css" />
+</head>
+<body epub:type="bodymatter">
+<section id="cha:c9_ninthchapter" class="level1" data-number="9">
+<h1 data-number="9">Fault Attacks</h1>
+<section id="sec:topics" class="level2 unnumbered">
+<h2 class="unnumbered">Topics</h2>
+<p>Introduction to Fault Attacks</p>
+<p>Fault Attack on RSA-CRT</p>
+<p>DRAM and Rowhammer</p>
+<p>Flip-Feng-Shui: Rowhammer attack on RSA<br />
+</p>
+</section>
+<section id="sec:introduction_to_fault_attacks" class="level2 unnumbered">
+<h2 class="unnumbered">Introduction to Fault Attacks</h2>
+<p>Up until now in the course we learned about <em>passive</em> attacks – i.e. attacks which measure <em>leakage</em> such as timing information and power traces. The advantage of these attacks is that they allow an attacker to acquire information in the process of an ongoing computation e.g. an AES key <em>before</em> it was fully mixed with the input – this fact can help the attacker extract secrets.</p>
+<p>In fault attacks we will become <em>active</em> in the sense that we will give the device-under-test (DUT) additional inputs such as heat or radiation.</p>
+<p>One problem with Fault attacks is that they use the strongest attack model, meaning – we assume most power on the attacker’s part.</p>
+</section>
+<section id="sec:active_attacks" class="level2" data-number="9.1">
+<h2 data-number="9.1">Active Attacks</h2>
+<section id="definition" class="level5" data-number="9.1.0.0.1">
+<h5 data-number="9.1.0.0.1">Definition:</h5>
+<blockquote>
+<p><em>“A fault attack is an active attack that allows extraction of secret information from cryptographic devices by breaking those devices.”</em></p>
+</blockquote>
+<p>In fault attacks we, the attackers, are <em>active</em> – we give additional inputs beside the main input such as:</p>
+<ul>
+<li><p>Fuzzing (garbage or bad input)</p></li>
+<li><p>Radiation</p></li>
+<li><p>Heat</p></li>
+<li><p>Vibration</p></li>
+<li><p>Power spikes etc.</p></li>
+</ul>
+<p>This way, we receive other (usually erroneous) outputs which might give us additional information about the computation and/or the secret. This process is described in .</p>
+<figure>
+<img src="../media/file135.png" id="fig:fault_attacks_schematic" alt="A schematic diagram of fault attacks and leakage types" /><figcaption aria-hidden="true">A schematic diagram of fault attacks and leakage types</figcaption>
+</figure>
+<p>Like with passive attacks, some of these outputs can be acquired at different stages of the computation process.</p>
+<p>Many fault attacks are inspired by studies in the field of <em>reliability</em>: a study in reliability will research a device’s physical boundaries e.g. the maximum or minimum temperature under which it performs reliably. Other examples of reliability studies are aimed at improving device performance under extreme conditions such as:</p>
+<ul>
+<li><p>Space and X-Rays</p></li>
+<li><p>Dense CPU Layouts</p></li>
+<li><p>Data Center Recovery (ECC-RAM)</p></li>
+</ul>
+<p>A security researcher implementing fault attacks will, on the other hand, purposefully subject the DUT to extreme conditions in order to inject errors in the device’s functionality to achieve their goal. In that sense, a reliability study of a given device can lay the ground-work for the fault attacks to come.</p>
+<blockquote>
+<p><em>“In the reliability community things happen by mistake. In the security community – things happen on purpose.”</em></p>
+</blockquote>
+</section>
+<section id="subsec:breaking_a_device_under_test" class="level3 unnumbered">
+<h3 class="unnumbered">Breaking a device-under-test</h3>
+<p>How can <em>breaking</em> a device help an attacker?</p>
+<ol>
+<li><p>BORE – <em>“Break Once, Run Everywhere”</em>: Some device families share a single secret among all instances.</p></li>
+<li><p>Repairable Devices: Temporary breakage is fine. Sometimes restarting the device is enough to “repair” the damage.</p></li>
+<li><p>Partial breakage: Sometimes it’s convenient to break <em>part</em> of a device, for example – destroy the subsystem responsible for DRM verification.</p></li>
+</ol>
+</section>
+</section>
+<section id="sec:fault_attack_taxonomy" class="level2" data-number="9.2">
+<h2 data-number="9.2">Fault Attack Taxonomy</h2>
+<p>The three ways we can examine a Fault Attack in order to understand it are:</p>
+<ol>
+<li><p>Method - <em>“How to inject the fault?”</em></p></li>
+<li><p>Properties - <em>“What class of fault to create?”</em></p></li>
+<li><p>Target - <em>“Which part of the system to break?”</em></p></li>
+</ol>
+<section id="subsec:fault_methods" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1">Fault Methods</h3>
+<section id="subsubsec:power_supply_attacks" class="level4" data-number="9.2.1.1">
+<h4 data-number="9.2.1.1">Power Supply Attacks</h4>
+<p>What happens if the device is underpowered? As we have previously seen, power in electronic devices is used to drive the CMOS transistors. If the device is slightly underpowered it might fail to switch some of the transistors and thus produce false calculations, and with even less power it might struggle with getting into operational state (boot loop) or even transition to an entirely faulty state. Another attack method involving the power supply is injecting power spikes (to a similar effect).</p>
+<p>Some parts of a device are typically more sensitive to the power supply than others, and thus under-powering or over-powering the device will de-stabilize it and inject faults.</p>
+<p>The obvious scenario for such an attack is when the DUT belongs to or is being controlled by the attacker – for example if they’re examining their own set-top box etc. In that case, the attacker can supply the device with as much/little power as they wish.</p>
+<p>Another example of such attack scenarios is in the field of RFID readers – the device powering an RFID chip is the reader, so a <em>malicious</em> RFID reader can over/under-power the chip to achieve various faulty results. For instance, if the RNG is connected to the power supply, we can mike its generated numbers deterministic.</p>
+</section>
+<section id="subsubsec:clock_timing_attacks" class="level4" data-number="9.2.1.2">
+<h4 data-number="9.2.1.2">Clock/Timing Attacks</h4>
+<p>The clock is typically a bus shared by many of the system’s components which synchronizes the propagation of calculations through the system – i.e. at the beginning all inputs are ready, and when there is a rising edge on the clock bus they start propagating throughout the various computational components. When all computations are finished they all wait for the next rising edge on the clock bus in order to proceed to the next stage. In a clock glitching attack the attacker would inject a rising edge on the clock bus at an arbitrary time. This way only <em>some</em> of the computations will have finished by that time while others are still being processed, and thus the device will be in a faulty (unstable) state.</p>
+<p>A notable example is the attack on Mifare Classic RFID chips we talked about in the beginning of the course <span class="citation" data-cites="nohl2008"></span> – the RNG in the chip is dependent only on the time between powering up the RFID tag and challenging it. An RFID reader operated by the attacker can control both parameters, thus making the generated challenges deterministic.</p>
+</section>
+<section id="subsubsec:temperature_attacks" class="level4" data-number="9.2.1.3">
+<h4 data-number="9.2.1.3">Temperature attacks</h4>
+<p>This attack method relies on the physical property of electrons (current). Electrons “jump”, and the higher the temperature – they will jump more frequently and to longer distances. If a device gets <em>too hot</em> – enough electrons can “jump” over the insulation layer in a transistor, for instance, to flip it from logical 1 to 0. This results in a fault.</p>
+<p>Because of the ubiquity of devices failures due to temperature, nowadays temperature sensors are integrated into most devices, so when it overheats – the device will shut down.</p>
+<p>An attacker can bypass the temperature sensor by disconnecting it. Another method would be to quickly alternate the temperature of the device from extremely high to extremely low, so that <em>on average</em> the temperature is reasonable, but it will still experience faults during the extreme phases of the cycles.</p>
+<p>In an interesting research paper <span class="citation" data-cites="appel"></span> a type-confusion attack on the Java virtual-machine was demonstrated: at first, the entire memory was filled with small arrays (say of size one). The Java VM is type-safe, so it is normally impossible to access one of the memory regions using a pointer to a different region. To inject a type-confusion fault the researchers used a 50W light bulb to heat the memory chip of the device enough to flip some of the bits (for illustration see ). As a result, a small portion of the data-structures describing the arrays in memory now held wrong values (e.g. changed their value from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">size=1</annotation></semantics></math> to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">size=20</annotation></semantics></math>). At this point, some affected data-structures <em>contain</em> a header of a different data-structure, to which the attackers now have read and write access. Changing the header of the second data structure to an arbitrary value gave the attackers access to the entirety of the device’s memory.</p>
+<figure>
+<img src="../media/file136.png" id="fig:memory_lightbulb" alt="A light bulb flipping memory bits filled with safe Java structures" /><figcaption aria-hidden="true">A light bulb flipping memory bits filled with safe Java structures</figcaption>
+</figure>
+</section>
+<section id="subsubsec:optical_electromagnetic" class="level4" data-number="9.2.1.4">
+<h4 data-number="9.2.1.4">Optical, Electromagnetic</h4>
+<p>When a laser hits a transistor it changes the energy level of the silicon inside, and sometimes it can change the transistor’s state. Notably different wavelengths are absorbed by different materials, so in a typical silicon chip different lasers will hit different layers of the device etc. Magnetic/Electromagnetic radiation and pulses have similar effects.</p>
+<p>The underlying principal of those attacks is that the attacker forcefully injects charge (energy) into the device. Once it’s stored inside it will have to dissipate one way or another, so as a result it injects a random faulty state into the device.</p>
+</section>
+<section id="subsubsec:reading_from_ram" class="level4" data-number="9.2.1.5">
+<h4 data-number="9.2.1.5">Reading from RAM</h4>
+<p>All of the attacks described above require very high engagement with the DUT – in order for the attacker to control the power/clock sources, for example, they sometimes would need to drill, cut or otherwise tamper with the device. Shining a laser on a device requires at the very least having it at a visible distance.</p>
+<p>The final attack method involves only <em>reading</em> from memory, and thus is very practical and requires very little physical engagement. This attack method is called <em>Rowhammer</em> and is discussed later in the lecture.</p>
+</section>
+</section>
+<section id="subsec:fault_properties" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2">Fault Properties</h3>
+<p>In this section we discuss:</p>
+<ol>
+<li><p>How controllable is the fault’s location/size? Precise? Loose? None?</p></li>
+<li><p>How controllable is the fault timing?</p></li>
+<li><p>What’s the fault’s duration? Transient? Permanent? Destructive?</p></li>
+</ol>
+<section id="subsubsec:destructive_fault_attacks_on_cryptographic_devices" class="level4 unnumbered">
+<h4 class="unnumbered">Destructive fault attacks on cryptographic devices</h4>
+<p>What can be done with fault attacks to symmetric ciphers?</p>
+<section id="easy-example" class="level5" data-number="9.2.2.0.1">
+<h5 data-number="9.2.2.0.1">Easy example:</h5>
+<p>Imagine that we have a pile of cipher devices with a 64bit key length, which work the following way: we can give the device a key and it tells us whether it’s the right key.</p>
+<p>What if we have a <em>destructive</em> fault attack that resets the top 32 bits of a device’s key? We can brute force the key in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">2\cdot 2^{31}</annotation></semantics></math> instead of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>63</mn></msup><annotation encoding="application/x-tex">2^{63}</annotation></semantics></math> (on average):</p>
+<p>First we inject the fault into one of the devices and brute-force the lower 32 bits of the key (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mn>2</mn><mn>31</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(2^{31})</annotation></semantics></math>), then we pick another device from the pile and brute-force only the higher 32 bits (another <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mn>2</mn><mn>31</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(2^{31})</annotation></semantics></math>).</p>
+</section>
+<section id="a-less-trivial-example" class="level5" data-number="9.2.2.0.2">
+<h5 data-number="9.2.2.0.2">A less trivial example:</h5>
+<p>We have a public-key device which we can ZAP and one bit of the key flips to zero.<br />
+We can save all of the plaintexts-cipher pairs until we reach the one matching an all zero key – which we can pre-calculate. This gives us the Hamming weight of the key. Now we go back one plaintext-cipher pair – we know that pair’s key’s Hamming Weight to be exactly one – meaning we need to brute-force only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math> keys (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math> is the key bit-length). Now we have the position of a single bit of the key.</p>
+<p>If we iterate all the way backwards to the original plaintext-cipher pair, we can acquire the key in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math> time!</p>
+</section>
+</section>
+</section>
+<section id="subsec:fault_targets" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3">Fault Target</h3>
+<p>What could be targeted by a fault attack?</p>
+<ol>
+<li><p>Input parameters (fuzzing, power and clock glitching)</p></li>
+<li><p>Storage (volatile/non-volatile)</p>
+<ol>
+<li><p>HDD – Destructive (persists after reset)</p></li>
+<li><p>RAM – Permanent</p></li>
+<li><p>Cache – Transient</p></li>
+</ol></li>
+<li><p>Data processing: injecting a fault mid-computation and the device gives a different answer.</p></li>
+<li><p>Instruction Processing/Control Flow: inject a fault in the IP register and change the instruction flow. There are various examples that demonstrate the usefulness of this type of taget</p>
+<ul>
+<li><p>change the program counter to compromise control flow</p></li>
+<li><p>ARM32 instructions are very densely packed, thus there is a very high probability of hitting a valid instruction after flipping a single bit. For example, <code>jnz</code> and <code>jmp</code> are only one bit apart.</p></li>
+<li><p>Change for loop condition in programs such as one that reads from a buffer, if the loop is infinite, it would dump RAM contents including source code.</p></li>
+</ul></li>
+</ol>
+<section id="two-examples-of-fault-attacks-targeting-control-flow" class="level5" data-number="9.2.3.0.1">
+<h5 data-number="9.2.3.0.1">Two examples of Fault Attacks targeting Control Flow:</h5>
+<ol>
+<li><p>The CHDK hacking community, used to dump the firmwares of Canon cameras via blinking one of their LEDs <span class="citation" data-cites="chdk canon"></span>.</p></li>
+<li><p>The “Unlooper”: Back in the 90’s pay-tv devices started cryptographically signing the content, and if the cryptographic checksum did not check out – the device would enter an endless loop. The hacking community invented “unloopers” – a gadget that would inject a power spike and fault the IP register, so that the pay-tv device would jump to some other section of the code, from which point it would function normally.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="sec:fault_attack_on_rsa_crt" class="level2" data-number="9.3">
+<h2 data-number="9.3">Fault attack on RSA-CRT</h2>
+<section id="subsec:rsa_decryption" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1">RSA decryption</h3>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>p</mi><mo>⋅</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">n = p\cdot q</annotation></semantics></math>, <span class="math inline">$M \equiv C^d  \equiv M^{ed \pmod{\phi(n)}} \equiv M^1 \equiv M \pmod{n}$</span></p>
+<p>RSA decryption is hard!</p>
+<p>Let’s speed it up using CRT (the Chinese Remainder Theorem): Multiplication operations are <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>n</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|n|^2)</annotation></semantics></math>. If we can do operations<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\ (\mathrm{mod}\ p)</annotation></semantics></math> and then<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\ (\mathrm{mod}\ q)</annotation></semantics></math> instead of<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\ (\mathrm{mod}\ n)</annotation></semantics></math>, we will reduce computation time by half.</p>
+<section id="explanation" class="level5" data-number="9.3.1.0.1">
+<h5 data-number="9.3.1.0.1">Explanation:</h5>
+<p>The bit-lengths of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math> are each half that of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>p</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mo stretchy="false" form="prefix">|</mo><mi>q</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="prefix">|</mo><mi>n</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|p|=|q|=\frac{1}{2}|n|</annotation></semantics></math> The computational complexity of multiplying by a number of length <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> is (roughly) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(x^2)</annotation></semantics></math>. Thus: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>p</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>q</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>n</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>⇒</mo><mo stretchy="false" form="prefix">(</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>p</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>q</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>n</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|p|^2) = O(|q|^2) = \frac{1}{4}O(|n|^2) \Rightarrow (O(|p|^2) + O(|q|^2)) = \frac{1}{2}O(|n|^2)</annotation></semantics></math></p>
+<p>So if we could multiply by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math> instead of by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>, we would cut <em>each</em> multiplication operation’s time complexity in half!</p>
+</section>
+<section id="subsubsec:chinese_remainder_theorem" class="level4" data-number="9.3.1.1">
+<h4 data-number="9.3.1.1">Chinese Remainder Theorem</h4>
+<figure>
+<img src="../media/file137.jpg" id="fig:chinese_remainder" alt="Chinese Remainder Theorem (Source: https://russinoff.com/papers/crt.html)" /><figcaption aria-hidden="true">Chinese Remainder Theorem (Source: <a href="https://russinoff.com/papers/crt.html">https://russinoff.com/papers/crt.html</a>)</figcaption>
+</figure>
+<p>The idea is that if we know both <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x\ (\mathrm{mod}\ p)</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x\ (\mathrm{mod}\ q)</annotation></semantics></math> then we can easily calculate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x\ (\mathrm{mod}\ n)</annotation></semantics></math>.</p>
+<p>So, given a message <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, calculate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mi>p</mi></msub><annotation encoding="application/x-tex">M_p</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mi>q</mi></msub><annotation encoding="application/x-tex">M_q</annotation></semantics></math>: <span class="math inline">$M_p \equiv C^d
+\pmod{n} \equiv C^d \pmod{p}$</span>, <span class="math inline">$M_q \equiv C^d \pmod{n} \equiv C^d \pmod{q}$</span></p>
+<p>To combine the values, we do: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>M</mi><mo>*</mo></msup><mo>=</mo><mi>C</mi><mi>R</mi><mi>T</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mi>p</mi></msub><mo>,</mo><msub><mi>M</mi><mi>q</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo></mrow><annotation encoding="application/x-tex">M^* = CRT(M_p, M_q) =</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>p</mi></msub><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>M</mi><mi>q</mi></msub><mo>⋅</mo><mi>p</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_p \cdot q \cdot (q^{-1} \ (\mathrm{mod}\ p)) + M_q \cdot p \cdot (p^{-1} \ (\mathrm{mod}\ q))</annotation></semantics></math></p>
+<p>It is easily provable that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>M</mi><mo>*</mo></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>M</mi><mi>q</mi></msub></mrow><annotation encoding="application/x-tex">M^* \ (\mathrm{mod}\ p) = M_q</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>M</mi><mo>*</mo></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>M</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">M^* \ (\mathrm{mod}\ q) = M_p</annotation></semantics></math>, so by the Chinese Remainder Theorem, this value <em>must</em> be equal to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>.</p>
+</section>
+<section id="subsubsec:the_boneh_demillo_lipton_fault_attack_on_rsa_crt" class="level4" data-number="9.3.1.2">
+<h4 data-number="9.3.1.2">The Boneh, DeMillo &amp; Lipton Fault Attack on RSA-CRT <span class="citation" data-cites="boneh"></span></h4>
+<p>The attacker has a decryption box (known plaintext scenario) with public key <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> and would like to recover <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> (the private key). Additionally, the attacker knows that the decryption box is decrypting using CRT. Finally, let us assume that the attacker can inject a fault (any fault) in the decryption process.</p>
+<p>The attacker first gets <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><msub><mi>M</mi><mi>p</mi></msub><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>M</mi><mi>q</mi></msub><mo>⋅</mo><mi>p</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M = M_p\cdot q\cdot (q^{-1} \ (\mathrm{mod}\ p)) + M_q\cdot
+p\cdot (p^{-1} \ (\mathrm{mod}\ q))</annotation></semantics></math> through the regular decryption process.</p>
+<p>Then, the attacker primes the device to re-calculate the message from the same cipher, this time injecting a <em>transient fault</em> during the calculation of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mi>p</mi></msub><annotation encoding="application/x-tex">M_p</annotation></semantics></math>, resulting in the device erroneously producing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">M&#39;_p</annotation></semantics></math> instead: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub><mo>≠</mo><msup><mi>C</mi><mi>d</mi></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M&#39;_p \neq C^d
+\ (\mathrm{mod}\ p)</annotation></semantics></math> The device will then proceed to combine <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">M&#39;_p</annotation></semantics></math> with the correct result of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mi>q</mi></msub><annotation encoding="application/x-tex">M_q</annotation></semantics></math>, resulting in: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>′</mi><mo>=</mo><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>M</mi><mi>q</mi></msub><mo>⋅</mo><mi>p</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M&#39; =  M&#39;_p \cdot q \cdot (q^{-1} \ (\mathrm{mod}\ p)) + M_q \cdot p \cdot (p^{-1}
+\ (\mathrm{mod}\ q))</annotation></semantics></math></p>
+<p>Now the attacker can calculate the value of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mi>M</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">M - M&#39;</annotation></semantics></math>: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><msub><mi>M</mi><mi>p</mi></msub><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>M</mi><mi>q</mi></msub><mo>⋅</mo><mi>p</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>−</mo></mrow><annotation encoding="application/x-tex">[M_p \cdot q \cdot (q^{-1} \ (\mathrm{mod}\ p)) + M_q \cdot p \cdot (p^{-1} \ (\mathrm{mod}\ q))]-</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>M</mi><mi>q</mi></msub><mo>⋅</mo><mi>p</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mo>=</mo></mrow><annotation encoding="application/x-tex">[M&#39;_p \cdot q \cdot (q^{-1} \ (\mathrm{mod}\ p)) + M_q \cdot p \cdot (p^{-1}
+\ (\mathrm{mod}\ q))]=</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mi>p</mi></msub><mo>−</mo><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(M_p - M&#39;_p) \cdot q \cdot (q^{-1} \ (\mathrm{mod}\ p))</annotation></semantics></math></p>
+<p>Finally, calculating the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>gcd</mo><annotation encoding="application/x-tex">\gcd</annotation></semantics></math> of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mi>M</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">M - M&#39;</annotation></semantics></math> yields: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>gcd</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>M</mi><mo>−</mo><mi>M</mi><mi>′</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>gcd</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo>⋅</mo><mi>q</mi><mo>,</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mi>p</mi></msub><mo>−</mo><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">\gcd(n, M - M&#39;) = \gcd(p \cdot q, (M_p - M&#39;_p) \cdot q \cdot (q^{-1}
+\ (\mathrm{mod}\ p))) = q</annotation></semantics></math></p>
+<section id="why-does-this-work" class="level5" data-number="9.3.1.2.1">
+<h5 data-number="9.3.1.2.1">Why does this work?</h5>
+<p>The greatest common divisor of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> and anything can be only <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>. On the other hand, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>M</mi><mi>p</mi></msub><annotation encoding="application/x-tex">M_p</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">M&#39;_p</annotation></semantics></math> can never be multiples of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>, otherwise both would equal 0. So, by that reasoning, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>gcd</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo>⋅</mo><mi>q</mi><mo>,</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mi>p</mi></msub><mo>−</mo><mi>M</mi><msub><mi>′</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>⋅</mo><mi>q</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="normal"><mi>m</mi><mi>o</mi><mi>d</mi></mstyle><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\gcd(p \cdot q, (M_p - M&#39;_p) \cdot q \cdot (q^{-1}
+\ (\mathrm{mod}\ p)))</annotation></semantics></math> <u>must</u> equal <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>, and thus we have cracked the cipher using a single fault attack.</p>
+<p>A later paper co-written by Arjen Lenstra <span class="citation" data-cites="lenstra"></span> further improved upon this attack to not require knowledge of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>.</p>
+</section>
+<section id="bml-in-practice" class="level5" data-number="9.3.1.2.2">
+<h5 data-number="9.3.1.2.2">BML in practice:</h5>
+<p>A paper <span class="citation" data-cites="schmidt"></span> showed how ZAPPING a device with an electric spark from a lighter during computation can achieve the described effect.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec:rowhammer" class="level2" data-number="9.4">
+<h2 data-number="9.4">Rowhammer</h2>
+<p>In the final section, we will describe the Rowhammer attack.</p>
+<section id="subsec:rowhammer_attack_taxonomy" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1">Rowhammer attack taxonomy</h3>
+<ul>
+<li><p>Target: DRAM on modern computers</p></li>
+<li><p>Properties: Permanent, controlled location</p></li>
+<li><p>Method: Memory accesses</p></li>
+</ul>
+<figure>
+<img src="../media/file138.jpg" id="fig:dram_svg" alt="High Level Illustration of DRAM Organization (Source: Wikipedia: Row hammer)" /><figcaption aria-hidden="true">High Level Illustration of DRAM Organization (Source: Wikipedia: Row hammer)</figcaption>
+</figure>
+</section>
+<section id="subsec:double_sided_rowhammer" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2">Double-sided Rowhammer</h3>
+<p>DRAM is the most common type of volatile memory. It is slow, dense and cheap relatively to SRAM. Every bit of RAM is stored in a single capacitor. Capacitors lose charge and they need to be periodically refreshed. The bits are selected using the <em>row buffer</em>.<br />
+The attack <span class="citation" data-cites="rowhammer"></span> utilizes the physical structure of RAM chips in order to induce faults: Due to parasitic leakage in DRAM capacitors, if enough consecutive reads are performed on the immediately adjacent rows eventually a bit will flip in the target row.<br />
+The fault attack exploit code is as follows:</p>
+<pre><code>while (true) {
+    x = memory[address1];
+    y = memory[address2];
+}</code></pre>
+<section id="what-happens-here" class="level5" data-number="9.4.2.0.1">
+<h5 data-number="9.4.2.0.1">What happens here?</h5>
+<p>We infinitely read from adjacent rows, so eventually, we can cause a bit confusion.</p>
+</section>
+<section id="subsubsec:the_challenge_of_cpu_caching" class="level4" data-number="9.4.2.1">
+<h4 data-number="9.4.2.1">Challenges</h4>
+<section id="the-challenge-of-cpu-caching" class="level5" data-number="9.4.2.1.1">
+<h5 data-number="9.4.2.1.1">The challenge of CPU caching</h5>
+<p>The CPU cache prevents the same memory address to be read consecutively from main memory, for performance reasons. To circumvent this limitation, several techniques can be employed:</p>
+<ol>
+<li><p>Intel CPUs provide non-temporal read/write opcodes – special instructions that read from memory and don’t get cached.</p></li>
+<li><p>The special <code>clflush</code> instruction can be used to explicitly flush the cache after each read operation (privileged operation).</p></li>
+<li><p>Finally, cache-population algorithms had been extensively studied and reverse-engineered, so it is possible to arrange for <em>arbitrary</em> cache misses.</p></li>
+</ol>
+</section>
+<section id="address-findings" class="level5" data-number="9.4.2.1.2">
+<h5 data-number="9.4.2.1.2">Address findings:</h5>
+<p>The attacker needs to find addresses that are on the same chip, and are in adjacent rows for the attack to work.</p>
+</section>
+</section>
+</section>
+<section id="subsec:countermeasures" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3">Countermeasures</h3>
+<section id="refresh-rate-increase" class="level5" data-number="9.4.3.0.1">
+<h5 data-number="9.4.3.0.1">Refresh-rate increase:</h5>
+<p>In order to overcome parasitic leakage, DRAM chips already have a mechanism in place to read and then re-write the values stored in each row periodically. One method of overcoming Rowhammer could be to significantly increase the refresh-rate of the chip. This obviously results in both performance degradation and increased power consumption.</p>
+</section>
+<section id="ecc-ram" class="level5" data-number="9.4.3.0.2">
+<h5 data-number="9.4.3.0.2">ECC-RAM:</h5>
+<p>High-end DRAM chips (typically meant for data center environments) contain error-correction coding (ECC) logic which can typically <em>correct</em> one erroneous bit and <em>detect</em> two (at which point it will crash the program/system). Those chips are immune to the basic form of Rowhammer described above, but as discussed later, are not bullet-proof.</p>
+</section>
+</section>
+<section id="subsec:rowhammer_variations" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4">Rowhammer variations</h3>
+<section id="subsubsec:flip_feng_shui" class="level4" data-number="9.4.4.1">
+<h4 data-number="9.4.4.1">Flip Feng-Shui</h4>
+<section id="page-de-duplication" class="level5" data-number="9.4.4.1.1">
+<h5 data-number="9.4.4.1.1">Page de-duplication:</h5>
+<p>On modern systems, typically much memory is shared among many processes running on the system. This is even more true of virtualized environments where the guest and the host, for example, could run the same OS. A common optimization is for the system to detect and de-duplicate pages containing the same data, thus freeing up memory.</p>
+</section>
+<section id="rowhammer-page-de-duplication" class="level5" data-number="9.4.4.1.2">
+<h5 data-number="9.4.4.1.2">Rowhammer + page de-duplication:</h5>
+<p>In a paper <span class="citation" data-cites="ffs"></span> researchers from VUA demonstrated how they can utilize page-deduplication in a virtualized environment to weaken cryptographic keys, resulting in unauthorized access via OpenSSH, and breach of trust via forging GPG signatures. The attack relies on the fact that the the attacker can <em>read</em> a de-duplicated page as much as they want. The attacker has to wait (or arrange) for a page containing sensitive information to be de-duped, then hammer on it until a bit in the key flips, making it much easier to factor.</p>
+<figure>
+<img src="../media/file139.png" id="fig:flip_feng_shui" alt="The attacker maps the same page as the victim, then utilizes Rowhammer to change the victim’s memory without causing page duplication" /><figcaption aria-hidden="true">The attacker maps the same page as the victim, then utilizes Rowhammer to change the victim’s memory without causing page duplication</figcaption>
+</figure>
+</section>
+</section>
+<section id="subsubsec:eccploit" class="level4" data-number="9.4.4.2">
+<h4 data-number="9.4.4.2">ECCPloit</h4>
+<p>In another paper <span class="citation" data-cites="eccploit"></span> researchers from VUA showed how they can use Rowhammer to quickly flip <em>enough</em> (typically three) bits on an ECC-RAM chip that error correction will not be able to detect it, thus defeating the ECC mitigation. The attack relies on the fact that error-correction takes time to compute, and this gives the attacker a window of opportunity.</p>
+</section>
+</section>
+<section id="rowhammer-based-attacks" class="level3" data-number="9.4.5">
+<h3 data-number="9.4.5">Rowhammer-based attacks</h3>
+<section id="rambleed" class="level4" data-number="9.4.5.1">
+<h4 data-number="9.4.5.1">RAMBleed</h4>
+<p>We will describe here Rowhammer based attack called RAMbleed which was presented in  <span class="citation" data-cites="rambleed_paper"></span>. While Rowhammer breaks data integrity, RAMBleed breaks also data confidentiality by allow the attacker read unauthorized memory areas. RAMBleed attack was implementes against OpenSSH server allowing the attacker read RSA secret private keys.</p>
+<figure>
+<img src="../media/file140.png" id="fig:rambleed_memory_layout" alt="RAMBleed memory layout" /><figcaption aria-hidden="true">RAMBleed memory layout</figcaption>
+</figure>
+<p>In order to perform this attack, the attacker need to get to spesific memory layout, as describe in . The attacker own A0, A1 and A2 block. Then attacker force OpenSSH server to put its private RSA key in oranges blocks by exploting linux buddy allocator which works in deterministic way. Then the attacker repeatedly accessing A0 and A2 blocks - this will access orange blocks as well because when DRAM access a part of the row, it access the whole row as well. This will hammer the red block and cause bit flips over there. The attacker can then read the red block- because he own it, and gets the RSA secret key.</p>
+<p>The performence from this paper shows accuracy of 82% when reading OpenSSH host key. Reading the victim’s secret in 0.31 bits/seconds.</p>
+<p>Suggested mitigations may be memory encryption, flushing keys from memory, probabilistic memory allocator and Hardware mitigations such as targeted row refresh and increasing refresh intervals.</p>
+</section>
+</section>
+</section>
+<section id="sec:RelatedWork" class="level2" data-number="9.5">
+<h2 data-number="9.5">Related Work</h2>
+<p>Additional related work on the topic of fault attacks includes:</p>
+<ul>
+<li><p><strong>DVFS</strong> - Dynamic Voltage and Frequency Scaling attacks make use of voltage and frequency combinations which are considered unstable.</p>
+<ul>
+<li><p><strong>CLKScrew</strong> - a paper by Tang et al. <span class="citation" data-cites="tang2017clkscrew"></span> that describes a technique that takes advantage of security vulnerabilities caused by the constant strive to improve energy efficiency, more specifically energy management mechanisms used in state-of-the-art mobile SoCs. The attack is based on overclocking CPU frequency to inject faults into the victim process and breach the isolated Trusted Execution Environment (TEE).</p></li>
+<li><p><strong>VoltJockey</strong> - a paper by Qiu et al. <span class="citation" data-cites="qiu2019voltjockey"></span> that describes a hardware fault-based attack on the TrustZone - a TEE security approach deployed in ARM processors. This attack, as opposed to the frequency manipulation in CLKscrew, uses software-controlled voltage manipulation. It is demonstrated on an ARM-based multi-core processor and manages to achieve several malicious goals: (1) acquire an AES key by cryptanalysis, (2) induce misbehavior in RSA decryption method to fake signatures and load unauthorized applications into TrustZone. More on VoltJockey in the next section.</p></li>
+<li><p><strong>Plundervolt</strong> - a paper by Murdock et al. <span class="citation" data-cites="murdock2020plundervolt"></span>, the first one that describes the use of voltage scaling for corruption of integrity and confidentiality of Intel SGX enclaved computations. The authors demonstrate full key recovery PoC attacks against RSA-CRT and AES-NI.</p></li>
+</ul></li>
+<li><p><strong>Speculative Fault Attacks</strong> - Such attacks make use of the behavior of modern processors and their attempt to predict and speculate the next instructions to be executed for maximum performance. CPUs will try to execute instructions ahead of time.</p>
+<ul>
+<li><p><strong>Spectre - Exploting Speculative Execution</strong> - a paper by Kocher et al that describes a speculative fault attack that involves inducing a victim to speculatively perform operations that would not occur during correct program execution and which leak the victim’s confidential information via a side-channel to the adversary.</p></li>
+</ul></li>
+</ul>
+<section id="voltjockey" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1">VoltJockey</h3>
+<p>As mentioned above, VoltJockey <span class="citation" data-cites="qiu2019voltjockey"></span> is a fault-injection attack, targeting the TrustZone execution environment of ARM processors. VoltJockey was deployed on the Krait multi-core processor, whose frequencies for each core can be different. However, the processor voltage is controlled with a shared hardware regulator, which introduces the main vulnerability that is exploited in this attack. VoltJockey uses software-controlled core frequency manipulation that is based on the susceptibility of DVFS. The attack was demonstrated in two use-cases that breach the system-wide secure technology in billions of ARM-based devices - TrustZone; (1) obtaining AES key, and (2) forge RSA signatures of unauthorized and possibly malicious applications. VoltJockey proved to be successful in a commerical device, the Google Nexus 6, and has demonstrated its dangerous implications in the secure execution environment TrustZone.</p>
+<p>An illustration of the VoltJockey attack process can be found in Figure <a href="#algo:voltjockey" data-reference-type="ref" data-reference="algo:voltjockey">[algo:voltjockey]</a>.</p>
+<figure>
+<img src="../media/file141.jpg" id="fig:voltjockey" alt="VoltJockey attack process." /><figcaption aria-hidden="true">VoltJockey attack process.</figcaption>
+</figure>
+</section>
+</section>
+</section>
+</body>
+</html>
