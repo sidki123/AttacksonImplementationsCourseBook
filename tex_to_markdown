@@ -6,7 +6,7 @@ cd ..
 for chapter in epub/EPUB/text/*.xhtml
 do
 echo converting ${chapter}...
-pandoc -f html -t markdown -o ${chapter/xhtml/md} ${chapter}
+pandoc -f html -t gfm -o ${chapter/xhtml/md} ${chapter}
 done
-cp epub/EPUB/text/*.md docs/book
+cp epub/EPUB/text/*.md docs/_book
 cp epub/EPUB/media/* docs/media
