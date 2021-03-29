@@ -1,3 +1,4 @@
+{:toc}
 # Temporal Side Channels I
 
 ## History
