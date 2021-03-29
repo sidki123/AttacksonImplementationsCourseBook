@@ -2,6 +2,8 @@
 
 This is the handbook for the course "Attacks on Secure Implementations", taught in 2020 at Ben-Gurion University by Dr. Yossi Oren.
 
+You can download the PDF of the entire handbook [here](https://github.com/Yossioren/AttacksonImplementationsCourseBook/raw/master/UniversityCourseBookAOI.pdf), or view it online [here](https://orenlab.sise.bgu.ac.il/AttacksonImplementationsCourseBook/). 
+
 Online course page: https://moodle2.bgu.ac.il/moodle/enrol/index.php?id=30088
 
 More information: https://iss.oy.ne.ro/Attacks
