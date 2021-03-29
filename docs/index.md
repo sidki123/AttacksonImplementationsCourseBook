@@ -9,7 +9,7 @@ More information: https://iss.oy.ne.ro/Attacks
 # Course materials
 
 ### Lecture 1 - Introduction
-[Textbook here](UniversityCourseBookAOI)
+[Textbook here](book/ch001.md)
 
 - [TEMPEST](https://www.youtube.com/watch?v=m7FYn4XMONE&list=UUKK5uxRGT-0Jtq1bGAg7XkQ&index=64) and secure communications, an attack on teletypewriter repeater machine. Part 1 (15 minutes);
 - [TEMPEST](https://youtu.be/lQzzB87ADYA) and secure communications, an attack on teletypewriter repeater machine. Part 2 (18 minutes); 
