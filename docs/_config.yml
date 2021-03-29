@@ -1,5 +1,5 @@
 remote_theme: pmarsceill/just-the-docs
-title: Attacks on Implementations Coursebook
+title: Coursebook for Attacks on Implementations 
 
 collections:
   book:
@@ -7,13 +7,9 @@ collections:
     permalink: /Book/:path
 
 just_the_docs:
-  # Define which collections are used in just-the-docs
   collections:
-    # Reference the "docs" collection
     book:
-      # Give the collection a name
-      name: Handbook
-      output: true
+      name: Book
 
 gems:
   - jekyll-last-modified-at
