@@ -1,5 +1,5 @@
 ---
-nav_order: 99
+nav_order: 00
 ---
 # Writing LaTeX
 1. Table of Contents
