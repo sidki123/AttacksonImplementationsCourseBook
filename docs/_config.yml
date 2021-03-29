@@ -13,6 +13,7 @@ just_the_docs:
     book:
       # Give the collection a name
       name: Handbook
+      output: true
 
 gems:
   - jekyll-last-modified-at
