@@ -3,8 +3,8 @@ title: Attacks on Implementations Coursebook
 
 collections:
   book:
-    permalink: "/:collection/:path/"
     output: true
+    permalink: /Book/:path
 
 just_the_docs:
   # Define which collections are used in just-the-docs
