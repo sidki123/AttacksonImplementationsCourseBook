@@ -10,7 +10,7 @@ nav_order: 01
 The following story is a true story about the NSA - the US intelligence
 agency and their classified internal journal named "Cryptologic
 Spectrum". In the US, there is a law called “The Freedom of Information
-Act” (FOIA). This lawy states that in general, any person can ask for an
+Act” (FOIA). This law states that in general, any person can ask for an
 access to government documents. So, in 2007, a lawyer named Michael
 Ravnitzky, went ahead and asked for the table of contents of all the
 articles in the NSA journal. The NSA tried postponing his request for
@@ -99,7 +99,7 @@ every time there is a difference in voltage. demonstrates such a setup.
 This Oscilloscope was not connected to the mixer, it was just laying at
 the other side of the room, connected to some other test equipment. The
 engineers discovered that every time this mixer entered the digit into
-the tape, they would get a pulse at the Oscilloscope. This is bcause
+the tape, they would get a pulse at the Oscilloscope. This is because
 that when you send a current into an electric monitor, the current is
 moving through the conductor and electromagnetic current is being
 generated. The Oscilloscope has little wires, and the electromagnetic
@@ -307,7 +307,7 @@ Cryptographically Secure Algorithms and Protocols:
     i.e 2 messages with the same hash. HMAC is a hash with a key - when
     you change the key, the hash is also changed.
 
--   **Multiparty Computation** - secure protocols for auctions, votings,
+-   **Multiparty Computation** - secure protocols for auctions, voting,
     etc.
 
 -   **Cryptocurrency** - Bitcoin for example.
@@ -427,10 +427,10 @@ impressive the attack becomes.
 
 ## Related Work
 
-The whole topic of Attacks on implimitation has been widly reaserched,
-and side channels attacks have been found on many varius types of
+The whole topic of Attacks on implementation has been widely researched,
+and side channels attacks have been found on many various types of
 implantation. Here are a few interesting such types of side channels
-attacks and examples for actoual attacks on those topics:
+attacks and examples for actual attacks on those topics:
 
 -   **Audio-based attacks** - for example, ultrasonic beacons and
     acoustic cryptanalysis. a type of side-channel attack that exploits
@@ -483,7 +483,7 @@ attacks and examples for actoual attacks on those topics:
     make inadvertent disclosure of sensitive information possible should
     the storage media be released into an uncontrolled environment
     (e.g., thrown in the trash or lost) an example of an attack that is
-    using data romance is cold boots wich steals sensitive cryptographic
+    using data romance is cold boots which steal sensitive cryptographic
     materials like cryptographic keys by Keeping DRAMs at lower room
     temperature, say -50 degrees C, and making it hard for the Dram to
     preserve his data properly. more details on this attack can be found
