@@ -8,7 +8,7 @@ nav_order: 01
 ## Motivation
 
 The following story is a true story about the NSA - the US intelligence
-agency and their classified internal journal named "Cryptographic
+agency and their classified internal journal named "Cryptologic
 Spectrum". In the US, there is a law called “The Freedom of Information
 Act” (FOIA). This lawy states that in general, any person can ask for an
 access to government documents. So, in 2007, a lawyer named Michael
