@@ -384,6 +384,13 @@ someone needed to commit the changes, which contained the CVE-ID. Thus
 hackers could see the fix and exploit the vulnerability before a patch
 was posted.
 
+## Analysis of cyber cases in the Israeli judicial system
+In this section we will present a review of 4 cyber case studies that are related to Israel’s Computer Laws and went to trial. The first part will include a summary of a case, the court decisions in regard to the case and a discussion about each case. The second part will be composed of questions in the form of a test about the case and will also include a True or False questions to allow practice and understanding of Israel cyber laws. 
+
+
+
+
+
 [1] Published in *Sefer Hachukkim* 5755 No. 1534, 25 July 1995 p. 366
 (P.L. 5754 No. 2278 p. 478).
 
