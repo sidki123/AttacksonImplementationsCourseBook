@@ -415,10 +415,10 @@ The judge in this trial was Dr. Avi Tenenbaum, who had several academic degrees 
 The State Attorney's Office has filed an appeal with the District Court. The District Court ruled that the defendant is innocent. 
 
 #### Discussion
-1. The term illegal penetration in clause 4 [1] is unclear and it would have been advisable to add clarification in the law to this issue. For example, penetration without the permission of the site manager.
-2."Don't Mess with the MOSSAD"- The defendant's activity was carried out on the Mossad's website. In our opinion, this claim would not have been filed if this activity had been carried out on the website of another government organization (transportation, agriculture, etc). Also, we think it's a show of strength for this organization that wants to make it clear that it's not being messed with.
-3.The difference between the penetration of the physical world and the virtual world is inconclusive and clear. For example, an attempted door-breaking at home versus attempted hacking in the virtual world. 
-4.In our opinion, the defendant was not charged in trial because of the judge's knowledge and understanding of computer science.
+- The term illegal penetration in clause 4 [1] is unclear and it would have been advisable to add clarification in the law to this issue. For example, penetration without the permission of the site manager.
+- "Don't Mess with the MOSSAD"- The defendant's activity was carried out on the Mossad's website. In our opinion, this claim would not have been filed if this activity had been carried out on the website of another government organization (transportation, agriculture, etc). Also, we think it's a show of strength for this organization that wants to make it clear that it's not being messed with.
+- The difference between the penetration of the physical world and the virtual world is inconclusive and clear. For example, an attempted door-breaking at home versus attempted hacking in the virtual world. 
+- In our opinion, the defendant was not charged in trial because of the judge's knowledge and understanding of computer science.
 
 ### Moshe Halevy (HALEMO) 2009- Israeli man charged with hacking to Collecting fines site
 
@@ -434,19 +434,19 @@ On this site there was a weakness **without** HALEMO 's knowledge in the way tha
 Police indict HALEMO for committing sophisticated computer fraud contrary to clause 3 and 5 of the Israel’s computer laws[1].
 The judge in this trial was Dr. Avi Tenenbaum.
 The following are the main points from the summary of the judge's decision:
-1.This is not a 'sophisticated computer scam' but a simple operation that anyone with a minimal understanding of computers can take.
-2.The defendant did not attempt anywhere to conceal his actions and/or evade responsibility.
-3.The facts show that there is no 'sophistication' here on the part of the defendant, but a serious failure that the defendant is not at all a party to.
-4.If there was room for blame for something, it would be towards the state and its authorities that enabled these actions. The site was not built for partial payments. **Partial payment of the debt leads to the cancellation of all debt**.
-5.The defendant **was unaware of the site's failures** and so the incident unfolded in a direction that could not be expected.
-6.The defendant refused to accept representation of a public defender although the defendant is not a lawyer and has no formal legal education.
+- This is not a 'sophisticated computer scam' but a simple operation that anyone with a minimal understanding of computers can take.
+- The defendant did not attempt anywhere to conceal his actions and/or evade responsibility.
+- The facts show that there is no 'sophistication' here on the part of the defendant, but a serious failure that the defendant is not at all a party to.
+- If there was room for blame for something, it would be towards the state and its authorities that enabled these actions. The site was not built for partial payments. **Partial payment of the debt leads to the cancellation of all debt**.
+- The defendant **was unaware of the site's failures** and so the incident unfolded in a direction that could not be expected.
+- The defendant refused to accept representation of a public defender although the defendant is not a lawyer and has no formal legal education.
 
 #### Discussion
 
-1.The term illegal penetration in clause 5 [1] did not exist because there were no **reasonable security mechanisms** on this site.
-2.Is entering another person's information into the site an illegal act for which to be punished? **In the virtual world, there is no clear boundary between penetration and non-penetration**. 
-3.The organization collecting the fines did not reasonably protect the privacy of the information. Performing a simple action of changing ID resulted in maliciously obtaining private information by exploiting the weaknesses of the security mechanisms. Implementation of security tools will be able to enable protection through the law against dealing with illegal **penetration**, etc. 
-4.What is the **limit on which police should handle harassment** incidents that take place in the virtual world such spam, deletion of content, private information, etc?
+- The term illegal penetration in clause 5 [1] did not exist because there were no **reasonable security mechanisms** on this site.
+- Is entering another person's information into the site an illegal act for which to be punished? **In the virtual world, there is no clear boundary between penetration and non-penetration**. 
+- The organization collecting the fines did not reasonably protect the privacy of the information. Performing a simple action of changing ID resulted in maliciously obtaining private information by exploiting the weaknesses of the security mechanisms. Implementation of security tools will be able to enable protection through the law against dealing with illegal **penetration**, etc. 
+- What is the **limit on which police should handle harassment** incidents that take place in the virtual world such spam, deletion of content, private information, etc?
 
 ### Doron Ben Shoshan (2014)- Perform malicious actions after dismissal
 
@@ -461,9 +461,9 @@ The Shalom's Court in Jerusalem convicted him on these counts. Doron filed an ap
 The District court decided to overturn the conviction so as not to cause disproportionate harm to the appellant and at the prospects of employment in the future, he was sentenced to 340 hours of public service. Also, for a one year probation **without a conviction**.
 
 #### Discussion
-1.There is a **public interest in reducing the phenomenon** of computer delinquency and in particular computer penetration because of the relative ease involved in the penetration of computer material by such and other technological means and misuse of modern technology. 
-2.Not deleting a fired **employee's password** is not a reason for employee abuse. In our opinion, It's necessary to examine the addition of a clause in the law that will not allow an employee who has been convicted in such criminal offenses to continue working in that technological field.
-3.The employee did a very serious thing as he not only harmed his company but also damaged corporate networks of customers. In our opinion, It's necessary to examine the addition of a clause in the law which refers to the worsening of the punishment if the defendant has committed offenses in other organizations beyond his organization.
+- There is a **public interest in reducing the phenomenon** of computer delinquency and in particular computer penetration because of the relative ease involved in the penetration of computer material by such and other technological means and misuse of modern technology. 
+- Not deleting a fired **employee's password** is not a reason for employee abuse. In our opinion, It's necessary to examine the addition of a clause in the law that will not allow an employee who has been convicted in such criminal offenses to continue working in that technological field.
+- The employee did a very serious thing as he not only harmed his company but also damaged corporate networks of customers. In our opinion, It's necessary to examine the addition of a clause in the law which refers to the worsening of the punishment if the defendant has committed offenses in other organizations beyond his organization.
 
 ### Nir Ezra (2015) - Stealing money from Israeli users’ bank accounts 
 
@@ -588,7 +588,7 @@ The Computer Laws are dated (1995) and the advancement of technology is a very g
     4. It wasn’t Nir’s case that caused the changes.
 
 ##### Answers
-1-4, 2-2, 3-2, 4-3, 5-3, 6-2, 7-3, 8-4, 9-4, 10-2, 11-4, 12-3, 13-4, 14-1, 15-1, 16-2, 17-1, 18-3, 19-3, 20-2
+1-iv, 2-ii, 3-ii, 4-iii, 5-iii, 6-ii, 7-iii, 8-iv, 9-iv, 10-ii, 11-iv, 12-iii, 13-iv, 14-i, 15-i, 16-ii, 17-i, 18-iii, 19-iii, 20-ii
 
 #### True/False Questions
 
